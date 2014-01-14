@@ -12,7 +12,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONReader;
 
 public class Resource {
-	
+	public static final String CONTEXT_ATTR_NAME = "com.baidu.fis.resource";
     public static final String STYLE_PLACEHOLDER = "<!--FIS_STYLE_PLACEHOLDER-->";
     public static final String SCRIPT_PLACEHOLDER = "<!--FIS_SCRIPT_PLACEHOLDER-->";
     
@@ -31,7 +31,6 @@ public class Resource {
             ScriptPoolRenderOrder.normal, ScriptPoolRenderOrder.optional};
     
     private Map<String, StringBuilder> scriptPool;
-    private static Resource instance;
     
     public Boolean debug = false;
 
@@ -40,28 +39,16 @@ public class Resource {
     }
     
     @SuppressWarnings("rawtypes")
-    private Resource(){
+    public Resource(){
         this.map = new HashMap<String, Map>();
         this.loaded = new HashMap<String, String>();
         this.collection = new HashMap<String, ArrayList<String>>();
         this.scriptPool = new HashMap<String, StringBuilder>();
     }
     
-    public static Resource getInstance(){
-    	if(instance == null){
-    		instance = new Resource();
-    	}
-    	return instance;
-    }
-    
-    public static Resource getInstance(String mapDir){
-    	Resource instance = getInstance();
-    	instance.setMapDir(mapDir);
-    	return instance;
-    }
-    
-    public static void destory(){
-    	instance = null;
+    public Resource(String dir){
+        this();
+        this.setMapDir(dir);
     }
     
     @SuppressWarnings({ "unchecked", "rawtypes" })

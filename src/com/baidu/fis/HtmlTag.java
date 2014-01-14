@@ -28,7 +28,8 @@ public class HtmlTag extends BodyTagSupport {
 		}
 		HttpServletRequest request = (HttpServletRequest) pageContext.getRequest();
 		String path = request.getSession().getServletContext().getRealPath(mapDir);
-		resource = Resource.getInstance(path);
+		resource = new Resource(path);
+		request.setAttribute(Resource.CONTEXT_ATTR_NAME, resource);
 		return EVAL_BODY_BUFFERED;
 	}
 	
@@ -36,7 +37,6 @@ public class HtmlTag extends BodyTagSupport {
 		BodyContent body = this.getBodyContent();
 		String html = body.getString() + "</html>";
 		html = resource.replace(html);
-		Resource.destory();
 		JspWriter out = pageContext.getOut();
 		try {
 			out.write(html);

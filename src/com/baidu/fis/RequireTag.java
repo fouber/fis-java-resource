@@ -1,5 +1,6 @@
 package com.baidu.fis;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.tagext.TagSupport;
 
 public class RequireTag extends TagSupport {
@@ -12,7 +13,8 @@ public class RequireTag extends TagSupport {
 	private String id;
 	
 	public int doStartTag() {
-		Resource resource = Resource.getInstance();
+		HttpServletRequest request = (HttpServletRequest) pageContext.getRequest();
+		Resource resource = (Resource) request.getAttribute(Resource.CONTEXT_ATTR_NAME);
 		try {
 			resource.require(this.id);
 		} catch (Exception e) {

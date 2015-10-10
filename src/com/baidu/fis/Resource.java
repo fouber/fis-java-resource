@@ -12,7 +12,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONReader;
 
 public class Resource {
-	public static final String CONTEXT_ATTR_NAME = "com.baidu.fis.resource";
+    public static final String CONTEXT_ATTR_NAME = "com.baidu.fis.resource";
     public static final String STYLE_PLACEHOLDER = "<!--FIS_STYLE_PLACEHOLDER-->";
     public static final String SCRIPT_PLACEHOLDER = "<!--FIS_SCRIPT_PLACEHOLDER-->";
     
